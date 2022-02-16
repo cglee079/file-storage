@@ -1,0 +1,8 @@
+HELP.md
+.gradle
+build/
+.idea
+out/
+temp
+
+application-dev-app.yaml

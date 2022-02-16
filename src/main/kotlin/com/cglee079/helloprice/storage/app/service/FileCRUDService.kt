@@ -10,7 +10,7 @@ import java.io.File
 
 @Service
 class FileCRUDService(
-    @Value("\${app.uploaded.directory:}")
+    @Value("\${app.storage.directory:}")
     private val uploadedDirectory: String,
 
     @Value("\${static.url:}")

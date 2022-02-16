@@ -6,6 +6,7 @@ spring:
       "dev": "dev-app"
       "prod": "prod-app"
 
+
 ---
 spring.config.activate.on-profile: dev
 spring.cloud.config.enabled: false
@@ -17,3 +18,7 @@ spring.config.activate.on-profile: prod
 spring.config.import: optional:configserver:http://cloud-config-server-service.app-cloud-config-server.svc.cluster.local:8888
 spring.cloud.config.enabled: true
 
+
+app:
+  storage:
+    directory: ${app_storage_directory:}

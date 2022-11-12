@@ -14,6 +14,5 @@ spring.config.activate.on-profile: test
 spring.cloud.config.enabled: false
 ---
 spring.config.activate.on-profile: prod
-spring.profiles.include: prod-app
 spring.config.import: optional:configserver:http://cloud-config-server-service.app-cloud-config-server.svc.cluster.local:8888
 spring.cloud.config.enabled: true

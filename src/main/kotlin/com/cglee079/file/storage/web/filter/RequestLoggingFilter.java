@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class RequestLoggingFilter extends OncePerRequestFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("ACCESS_LOGGER");
+    private static final Logger LOGGER = LoggerFactory.getLogger("STASH_LOGGER");
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Override

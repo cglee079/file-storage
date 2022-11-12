@@ -13,7 +13,7 @@ class FileCRUDApi(
     fun upload(@ModelAttribute write: FileWrite): String {
         return fileCRUDService.writeFile(write)
     }
-    @DeleteMapping("/api/file")
+    @PostMapping("/api/delete")
     fun delete(@RequestBody delete: FileDelete) {
         fileCRUDService.deleteFile(delete)
     }

@@ -1,7 +1,7 @@
 ###########################
 ##### RUN BUILD #####
 ###########################
-FROM cglee079/helloprice-storage:base  AS builder
+FROM cglee079/file-storage:base  AS builder
 
 COPY --chown=gradle:gradle . /home/gradle/src
 

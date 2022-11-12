@@ -1,11 +1,11 @@
-package com.cglee079.helloprice.storage
+package com.cglee079.file.storage
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class HellopriceStorageApplication
+class FileStorageApplication
 
 fun main(args: Array<String>) {
-    runApplication<HellopriceStorageApplication>(*args)
+    runApplication<FileStorageApplication>(*args)
 }

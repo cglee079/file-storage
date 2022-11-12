@@ -1,10 +1,10 @@
-package com.cglee079.helloprice.storage
+package com.cglee079.file.storage
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class StorageApplicationTests {
+class FileStorageApplicationTests {
 
     @Test
     fun contextLoads() {

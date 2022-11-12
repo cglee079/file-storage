@@ -1,12 +1,10 @@
-spring.application.name: helloprice-storage
+spring.application.name: file-storage
 
 spring:
   profiles:
     group:
       "dev": "dev-app"
       "prod": "prod-app"
-
-app.storage.directory: ${app_storage_directory:}
 
 ---
 spring.config.activate.on-profile: dev
@@ -16,5 +14,4 @@ spring.config.activate.on-profile: test
 spring.cloud.config.enabled: false
 ---
 spring.config.activate.on-profile: prod
-spring.config.import: optional:configserver:http://cloud-config-server-service.app-cloud-config-server.svc.cluster.local:8888
-spring.cloud.config.enabled: true
+spring.cloud.config.enabled: false

@@ -1,1 +1,1 @@
-rootProject.name = "helloprice-storage"
+rootProject.name = "file-storage"

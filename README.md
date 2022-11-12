@@ -1,1 +1,1 @@
-helloprice-storage
+file-storage

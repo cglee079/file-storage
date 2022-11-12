@@ -32,5 +32,6 @@
         <appender-ref ref="LOG_STASH"/>
     </logger>
 
+
 </configuration>
 

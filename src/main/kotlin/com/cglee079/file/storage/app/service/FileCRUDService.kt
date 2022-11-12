@@ -24,7 +24,7 @@ class FileCRUDService(
         FileCRUDUtil.writeForceDirectory(rootDirectoryPath.mergePath(directoryPath))
         FileCRUDUtil.writeFile(rootDirectoryPath.mergePath(filePath), write.file)
 
-        return namespace.mergePath(filePath)
+        return filePath
     }
     fun deleteFile(delete: FileDelete) {
         val namespace = delete.namespace

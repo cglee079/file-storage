@@ -20,10 +20,12 @@ RUN cp -r /home/gradle/src/build/libs/* /app
 ###########################
 ##### RUN APPLICATION #####
 ###########################
-FROM arm64v8/openjdk:11-jdk
+FROM openjdk:11.0.16-jdk
 
 ARG HEAP_SIZE
+ENV HEAP_SIZE=${HEAP_SIZE:-512M}
 ARG NEW_SIZE
+ENV NEW_SIZE=${NEW_SIZE:-256M}
 
 COPY --from=builder /app /app
 

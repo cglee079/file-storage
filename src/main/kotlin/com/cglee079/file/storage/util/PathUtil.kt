@@ -12,4 +12,8 @@ object PathUtil {
         }
     }
 
+    fun String.getParentPath(): String {
+        return this.split("/").toMutableList().dropLast(1).joinToString("/")
+    }
+
 }

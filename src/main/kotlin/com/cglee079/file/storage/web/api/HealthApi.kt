@@ -10,4 +10,9 @@ class HealthApi {
         return "OK"
     }
 
+    @GetMapping("/status")
+    fun status(): String {
+        return "OK"
+    }
+
 }

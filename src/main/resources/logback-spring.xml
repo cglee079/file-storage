@@ -4,7 +4,7 @@
     <springProperty scope="context" name="profile" source="spring.config.activate.on-profile"/>
 
     <appender name="LOG_STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>192.168.50.2:15000</destination>
+        <destination>elk-logstash-service.infra-elk.svc.cluster.local:5000</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"index":"${application_name}-${profile}"}</customFields>
         </encoder>

@@ -1,0 +1,13 @@
+server:
+  port: 8083
+
+app:
+  storage:
+    directory: /Users/podo/Desktop/workspace/code/cglee079/file-storage/temp
+
+
+spring.servlet:
+  multipart:
+    enabled: true
+    max-file-size: 100MB
+    max-request-size: 100MB

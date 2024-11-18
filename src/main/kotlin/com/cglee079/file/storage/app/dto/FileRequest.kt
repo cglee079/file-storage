@@ -8,6 +8,12 @@ data class FileMove(
     val destPath: String,
 )
 
+data class FileCopy(
+    val namespace: String,
+    val sourcePath: String,
+    val destPath: String,
+)
+
 data class FileWrite(
     val namespace: String,
     val path: String,

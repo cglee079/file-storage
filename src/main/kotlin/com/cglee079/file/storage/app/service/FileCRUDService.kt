@@ -1,5 +1,6 @@
 package com.cglee079.file.storage.app.service
 
+import com.cglee079.file.storage.app.dto.FileCopy
 import com.cglee079.file.storage.app.dto.FileDelete
 import com.cglee079.file.storage.app.dto.FileMove
 import com.cglee079.file.storage.app.dto.FileWrite
@@ -17,21 +18,30 @@ class FileCRUDService(
     @Value("\${app.storage.directory:}") private val storageDirectory: String,
 ) {
 
+    fun copyFile(request: FileCopy): String {
+        copyFile(request.namespace, request.sourcePath, request.destPath)
+        return request.destPath
+    }
+
     fun moveFile(request: FileMove): String {
-        val namespace = request.namespace
+        val (sourceFile, _) = copyFile(request.namespace, request.sourcePath, request.destPath)
+        sourceFile.delete()
+        return request.destPath
+    }
+
+    private fun copyFile(namespace: String, sourcePath: String, destPath: String): Pair<File, File> {
         val rootDirectoryPath = storageDirectory.mergePath(namespace)
-        val sourcePath = request.sourcePath
-        val destPath = request.destPath
 
         val destDirectoryPath = destPath.getParentPath()
 
         val sourceFile = File(rootDirectoryPath.mergePath(sourcePath))
-        FileCRUDUtil.writeForceDirectory(rootDirectoryPath.mergePath(destDirectoryPath))
-        FileCRUDUtil.copyFile(sourceFile, rootDirectoryPath.mergePath(destPath))
+        val destDirectory = File(rootDirectoryPath.mergePath(destDirectoryPath))
+        FileUtils.forceMkdir(destDirectory)
 
-        FileCRUDUtil.deleteFile(sourceFile)
+        val destFile = File(rootDirectoryPath.mergePath(destPath))
+        Files.copy(sourceFile.toPath(), destFile.toPath())
 
-        return destPath
+        return sourceFile to destFile
     }
 
     fun writeFile(write: FileWrite): String {
@@ -41,8 +51,11 @@ class FileCRUDService(
 
         val directoryPath = filePath.getParentPath()
 
-        FileCRUDUtil.writeForceDirectory(rootDirectoryPath.mergePath(directoryPath))
-        FileCRUDUtil.writeFile(rootDirectoryPath.mergePath(filePath), write.file)
+        val destDirectory = File(rootDirectoryPath.mergePath(directoryPath))
+        FileUtils.forceMkdir(destDirectory)
+
+        val destFile = File(rootDirectoryPath.mergePath(filePath))
+        write.file.transferTo(destFile)
 
         return filePath
     }
@@ -50,39 +63,8 @@ class FileCRUDService(
     fun deleteFile(delete: FileDelete) {
         val namespace = delete.namespace
         val rootDirectoryPath = storageDirectory.mergePath(namespace)
-        FileCRUDUtil.deleteFile(rootDirectoryPath.mergePath(delete.path), delete.filename)
-    }
-
-
-}
-
-
-object FileCRUDUtil {
-
-    fun copyFile(sourceFile: File, destPath: String): File {
-        val destFile = File(destPath)
-        Files.copy(sourceFile.toPath(), destFile.toPath())
-        return destFile
-    }
-
-    fun writeFile(path: String, multipartFile: MultipartFile): File {
-        val file = File(path)
-        multipartFile.transferTo(file) // 쓰기 연산
-        return file
-    }
-
-    fun writeForceDirectory(path: String): File {
-        val directory = File(path)
-        FileUtils.forceMkdir(directory)
-        return directory
-    }
-
-    fun deleteFile(directory: String, filename: String) {
-        File(directory, filename).delete()
-    }
-
-    fun deleteFile(file: File) {
-        file.delete()
+        File(rootDirectoryPath.mergePath(delete.path).mergePath(delete.filename)).delete()
     }
 
 }
+

@@ -23,7 +23,7 @@ class FileCRUDApi(
         val file = fileCRUDService.getFile(request)
 
         if (!file.exists()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found")
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File Not Found")
         }
 
         try {

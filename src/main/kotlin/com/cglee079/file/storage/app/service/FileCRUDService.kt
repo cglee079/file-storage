@@ -1,6 +1,7 @@
 package com.cglee079.file.storage.app.service
 
 import com.cglee079.file.storage.app.dto.*
+import com.cglee079.file.storage.context.ThreadLogger
 import com.cglee079.file.storage.util.PathUtil.getParentPath
 import com.cglee079.file.storage.util.PathUtil.mergePath
 import org.apache.tomcat.util.http.fileupload.FileUtils
@@ -17,7 +18,13 @@ class FileCRUDService(
 
     fun getFile(request: FileGet): File {
         val filePath = storageDirectory.mergePath(request.namespace).mergePath(request.path)
-        return File(filePath)
+
+        ThreadLogger.appendMessage(this::class, "File path: $filePath")
+        val file = File(filePath)
+
+        ThreadLogger.appendMessage(this::class, "File Exists : ${file.exists()}")
+
+        return file
     }
 
     fun copyFile(request: FileCopy): String {

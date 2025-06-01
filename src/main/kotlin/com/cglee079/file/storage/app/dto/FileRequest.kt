@@ -2,6 +2,11 @@ package com.cglee079.file.storage.app.dto
 
 import org.springframework.web.multipart.MultipartFile
 
+data class FileGet(
+    val namespace: String,
+    val path: String,
+)
+
 data class FileMove(
     val namespace: String,
     val sourcePath: String,

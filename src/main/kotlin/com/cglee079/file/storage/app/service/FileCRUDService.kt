@@ -1,9 +1,6 @@
 package com.cglee079.file.storage.app.service
 
-import com.cglee079.file.storage.app.dto.FileCopy
-import com.cglee079.file.storage.app.dto.FileDelete
-import com.cglee079.file.storage.app.dto.FileMove
-import com.cglee079.file.storage.app.dto.FileWrite
+import com.cglee079.file.storage.app.dto.*
 import com.cglee079.file.storage.util.PathUtil.getParentPath
 import com.cglee079.file.storage.util.PathUtil.mergePath
 import org.apache.tomcat.util.http.fileupload.FileUtils
@@ -17,6 +14,11 @@ import java.nio.file.Files
 class FileCRUDService(
     @Value("\${app.storage.directory:}") private val storageDirectory: String,
 ) {
+
+    fun getFile(request: FileGet): File {
+        val filePath = storageDirectory.mergePath(request.namespace).mergePath(request.path)
+        return File(filePath)
+    }
 
     fun copyFile(request: FileCopy): String {
         copyFile(request.namespace, request.sourcePath, request.destPath)
